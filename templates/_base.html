@@ -7,13 +7,72 @@
     <title>
         {% block title %}BookStore{% endblock title %}
     </title>
+    <!--boostrap-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+   
+ 
+    <!--css-->
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
 </head>
 <body>
-    <main>
-        {% block content %}
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+       <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'home' %}">BOOKSTORE</a>
+
+         <button class="navbar-toggler" type="button"\
+         data-bs-toggle="collase" data-bs-target="#navbarCollapse" \
+         aria-controls="#navbarCollapse" aria-expanded="false" \ area-lebel="Toggle navigation" >
+         <span class="navbar-toggle-icon"></span>
+        </button> 
+
+          <div class="collapse navbar-collapse" id="navbarCollapse" >
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                {% if user.is_authenticated %}
+
+                <li class="nav-item">
+
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                  <!--  <input type="nav-link" type="submit" value="log out">-->
+                    <button class="nav-link" type="submit">log out</button>
+                </form>
+               </li>
+
+                <!--<li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout'%}">log out</a>
+
+                </li>-->
+                {% else %}
+
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'login'%}">log in</a>
+              </li>  
+
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'signup'%}">Sign up</a>
+              </li>
+
+                {% endif %}
+
+            </ul>
+
+          </div>
+
+          
+
+       </div> 
+    </nav>
+    <!--cuerpo del proyecto-->
+
+    <main class="container">
+        {% block content %} 
+
         {% endblock content %}
     </main>
+    <!--comandos javascript-->>
+    <!--boostrap scritp-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
     <script src="{% static 'js/base.js' %}"></script>
 </body>
 </html>
